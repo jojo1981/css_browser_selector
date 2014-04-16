@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<title>CSS browser selector</title>
+		<script type="text/javascript" src="tests/jquery-1.2.6.min.js"></script>
+		<script type="text/javascript" src="css_browser_selector_dev.js"></script>
+		<script>
+			$(document).ready(function() {
+				var classes = $('html').attr('class');
+				$('#classes').text(classes);
+			});
+		</script>
+	</head>
+	<body>
+		<h1>CSS browser selector</h1>
+		<h3>Classes on HTML element:</h3>
+		<div id="classes"></div>
+
+		<h3>User agent and classes:</h3>
+		<script>
+			document.writeln('<p>'+navigator.userAgent+' - '+document.getElementsByTagName('html')[0].className+'</p>');
+		</script>
+	</body>
+</html>

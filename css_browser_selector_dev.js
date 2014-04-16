@@ -12,6 +12,11 @@
 showLog=true;
 function log(m) {if ( window.console && showLog ) {console.log(m); }  }
 
+/*
+ Extended config for CSS browser selector
+ */
+var showScreensize = false;
+
 function css_browser_selector(u)
 {
     var	uaInfo = {},
@@ -126,8 +131,10 @@ function css_browser_selector(u)
         return widthClasses;
     } // screenSize
 
-    window.onresize = screenSize;
-    screenSize();
+    if(showScreensize) {
+        window.onresize = screenSize;
+        screenSize();
+    }
 
     var cssbs = (b.join(' ')) + " js ";
     html.className =   ( cssbs + html.className.replace(/\b(no[-|_]?)?js\b/g,"")  ).replace(/^ /, "").replace(/ +/g," ");
