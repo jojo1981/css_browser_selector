@@ -2,6 +2,13 @@
 	<head>
 		<title>CSS browser selector</title>
 		<script type="text/javascript" src="tests/jquery-1.2.6.min.js"></script>
+		<script>
+			// CSS browser selector config can be overwritten
+			// Do this BEFORE you load css_browser_selector_dev.js!
+			var CSS_BROWSER_SELECTOR_CONFIG = {
+				'showScreenSize': true
+			};
+		</script>
 		<script type="text/javascript" src="css_browser_selector_dev.js"></script>
 		<script>
 			$(document).ready(function() {
@@ -17,6 +24,16 @@
 
 		<h3>User agent and classes:</h3>
 		<script>
+			document.writeln('<p>Custom config:<br />');
+			if(typeof CSS_BROWSER_SELECTOR_CONFIG != 'undefined') {
+				$.each(CSS_BROWSER_SELECTOR_CONFIG, function(key, value) {
+					document.write(key + ': ' + value + '<br />');
+				});
+			} else {
+				document.write('config not set');
+			}
+			document.writeln('</p>');
+
 			document.writeln('<p>'+navigator.userAgent+' - '+document.getElementsByTagName('html')[0].className+'</p>');
 		</script>
 	</body>

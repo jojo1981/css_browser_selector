@@ -13,9 +13,20 @@ showLog=true;
 function log(m) {if ( window.console && showLog ) {console.log(m); }  }
 
 /*
- Extended config for CSS browser selector
+ Default config for CSS browser selector
+
+ You can overwrite config variables with:
+
+ var CSS_BROWSER_SELECTOR_CONFIG = {
+ 'showScreenSize': true
+ }
+
+ Add this to your HTML head before css_browser_selector_dev.js is loaded.
  */
-var showScreensize = false;
+var showScreenSize = false;
+
+
+// End default configuration
 
 function css_browser_selector(u)
 {
@@ -118,7 +129,16 @@ function css_browser_selector(u)
             ,( is('ipad|iphone|ipod') && !is('safari') )  ?  'ipad_app'  : ''
 
 
-        ]; // b
+        ], // b
+        config = {};
+
+    // Get default config and from global var CSS_BROWSER_SELECTOR_CONFIG
+    config.showScreensize = showScreenSize;
+    if(typeof CSS_BROWSER_SELECTOR_CONFIG != 'undefined') {
+        if(CSS_BROWSER_SELECTOR_CONFIG.showScreenSize != undefined) {
+            config.showScreenSize = CSS_BROWSER_SELECTOR_CONFIG.showScreenSize;
+        }
+    }
 
     function screenSize()
     {
@@ -131,7 +151,7 @@ function css_browser_selector(u)
         return widthClasses;
     } // screenSize
 
-    if(showScreensize) {
+    if(config.showScreenSize) {
         window.onresize = screenSize;
         screenSize();
     }
